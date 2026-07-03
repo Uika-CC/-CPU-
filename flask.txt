@@ -1,0 +1,33 @@
+from flask import Flask
+from ceshi import cpu,neicun,disk_used,alarm,main
+
+
+app = Flask(__name__)
+
+@app.route("/")     #路由根目录
+def index():
+a = 123
+    return f'你输入的数字是{a}'
+
+
+@app.route("/cpu")  #路由cpu目录
+def cpu_load():
+    return f"CPU负载{cpu()}"
+
+
+@app.route("/memory")   #路由memory目录
+def mem():
+    return f'内存已使用{neicun()}'
+
+
+@app.route("/disk_used")     #路由disk_used目录
+def disk_u():
+    return f'磁盘已使用{disk_used()}'
+
+
+#占用8006端口，ip设为任意
+app.run(
+    host = "0.0.0.0",
+    port = 8006
+)
+print('服务已启动')
